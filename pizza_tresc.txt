@@ -1,0 +1,109 @@
+"A programmer is a human, rock, or any other object capable of turning pizza
+and caffeine into code."
+    -- http://www.urbandictionary.com/define.php?term=Programmer&defid=7578052
+
+A zatem pizza to bardzo ważna rzecz, a odpowiedni dobór najlepszej pizzy to
+sztuka życia.
+
+Na potrzeby tego zadania zakładamy, że każda pizzeria ma w swoim menu pewien
+ustalony podczas tworzenia pizzerii zestaw rodzajów dostępnych pizz.
+Przyjmujemy, że każda pizza zamówiona w pizzerii składa się z ośmiu kawałków,
+wszystkie jednego z dostępnych w pizzerii rodzajów. Następnie w procesie
+konsumpcji, zapewne grupowej, rozważamy dwie możliwe operacje:
+
+1. Podzielenie pizzy na 2x więcej kawałków, przez przecięcie każdego na pół.
+
+2. Złożenie nowej pizzy przez wzięcie dwóch pizz z tej samej pizzerii oraz
+   wybranie z nich pewnego podzbioru kawałków. Dopuszcza się pustą pizzę
+   i dopuszcza się mieszanie pizz o różnej liczbie kawałków.
+
+Dwie pizze pochodzące z jednej pizzerii o takiej samej liczbie kawałków
+poszczególnych rodzajów uważamy za identyczne, w przeciwnym wypadku za
+różne.
+
+Zadanie polega na stworzeniu typu szablonowego reprezentującego pizzerię
+
+template<typename... Kinds> struct Pizzeria;
+
+udostępniającą publiczną strukturę
+
+template<typename Kind> struct make_pizza;
+
+której publiczna definicja "type" reprezentuję 8-kawałkową pizzę
+rodzaju Kind.
+
+Typ reprezentujący pizzę powinien udostępniać:
+
+1. Publiczną statyczną metodę
+
+   template<typename Kind> static constexpr size_t count();
+
+   zwracającą liczbę kawałków typu Kind.
+
+2. Publiczną statyczną metodę
+
+   static constexpr std::array<size_t, [N]> as_array();
+
+   gdzie [N] jest liczbą rodzajów pizz dostępnych w pizzerii, zwracającą tablicę
+   liczb, mówiącą, ile jest kawałków poszczególnych rodzajów (zgodnie z kolejnością
+   rodzajów podanych przy definiowaniu pizzerii).
+
+3. Publiczny typ sliced_type reprezentujący podzieloną pizzę.
+
+Oprócz powyższych, należy stworzyć szablon struktury
+
+template<typename Pizza1, typename Pizza2>
+struct best_mix;
+
+której publiczna definicja "type" powinna określać najlepszą możliwą pizzę, jaką
+można złożyć z podanych pizz. W przypadku niejednoznaczności dopuszcza się dowolną
+z najlepszych.
+
+No dobrze, ale co to znaczy najlepsza możliwa? Otóż smakowitość pizzy to suma
+smakowitości rodzajów kawałków, z jakich się składa. A smakowitość rodzaju zależy
+od liczby kawałków tego rodzaju. Wiadomo, że dla zera kawałków wynosi zero (należy
+to sprawdzić!), ale poza tym nie musi być liniowa. Operacja best_mix powinna
+działać, o ile wszystkie podane przy konstruowaniu pizzerii rodzaje pizzy
+definiują metody yumminess o sygnaturze jak poniżej:
+
+struct supreme {
+    static constexpr [dowolny_typ_arytmetyczny] yumminess(size_t slices) {
+        return -125LL*(slices - 6)*slices*slices/243;
+    }
+};
+
+Przykład użycia znajduje się w opublikowanym w SVN-ie pliku pizza.cc. Jest on
+częścią treści zadania.
+
+
+C++11, C++14, C++17
+
+Szablony to jeden z najszybciej ewoluujących aspektów języka C++. Niniejsze
+zadanie można rozwiązać w C++11. Można też w C++14 lub C++17 (znanym póki
+co także jako C++1z, ponieważ nie jest to jeszcze zatwierdzony standard).
+W każdym z kolejnych kod może być coraz krótszy.
+
+Ponieważ kompilator zainstalowany na students nie obsługuje najnowszych
+standardów, udostępniamy kompilator Clang w wersji 3.7.0. Oprócz obsługi
+nowości, jest znany z bardziej czytelnych komunikatów o błędach i szybszej
+kompilacji. Spróbujcie! W SVN-ie obok treści zadania znajduje się skrypt
+compile_clang.sh, który zadziała na students. Ten kompilator będzie także
+użyty do oceny rozwiązań.
+
+
+ROZWIĄZANIE
+
+Rozwiązanie powinno składać się z pliku pizza.hh.
+Plik ten należy umieścić w repozytorium w katalogu
+
+grupaN/zadanie4/ab123456+cd123456
+
+lub
+
+grupaN/zadanie4/ab123456+cd123456+ef123456
+
+gdzie N jest numerem grupy, a ab123456, cd123456, ef123456 są identyfikatorami
+członków zespołu umieszczającego to rozwiązanie. Katalog z rozwiązaniem nie
+powinien zawierać innych plików, ale może zawierać podkatalog private, gdzie
+można umieszczać różne pliki, np. swoje testy. Pliki umieszczone w tym
+podkatalogu nie będą oceniane.
