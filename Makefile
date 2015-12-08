@@ -4,5 +4,9 @@ COMPILER := $(shell ./choose_clang.sh)
 pizza: pizza.cc pizza.hh
 	 ${COMPILER} ${CXXFLAGS} pizza.cc -o pizza
 
+tests: test_pizza.sh pizza_sokolowski.cc
+	./test_pizza.sh
+
 clean:
 	rm -f pizza
+

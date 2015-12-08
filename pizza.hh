@@ -45,7 +45,7 @@ template<typename Kind, typename = void>
 struct has_yumminess : std::false_type { };
 
 template<typename Kind>
-struct has_yumminess<Kind, typename void_t<package<size_t, Kind::yumminess(0)>>::type> {
+struct has_yumminess<Kind, typename void_t<package<decltype(Kind::yumminess(0)), Kind::yumminess(0)>>::type> {
 	static constexpr bool value = Kind::yumminess(0) == 0;
 };
 
