@@ -45,7 +45,8 @@ template<typename Kind, typename = void>
 struct has_yumminess : std::false_type { };
 
 template<typename Kind>
-struct has_yumminess<Kind, typename void_t<package<size_t, Kind::yumminess(0)>>::type> : std::conditional<Kind::yumminess(0) == 0, std::true_type, std::false_type> {};
+struct has_yumminess<Kind, typename void_t<package<size_t, Kind::yumminess(0)>>::type>
+	: std::conditional<Kind::yumminess(0) == 0, std::true_type, std::false_type> {};
 
 //////////////////////////////////////////////////////////
 
