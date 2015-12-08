@@ -28,6 +28,7 @@ int main() {
 	using Dominion = Pizzeria<supreme, napoli>;
 
     using Supreme = Dominion::make_pizza<supreme>::type;
+
     static_assert(Supreme::count<supreme>() == 8, "Where's my supreme!?");
     static_assert(Supreme::count<napoli>() == 0, "Napoli!?");
     assert((Supreme::as_array() == std::array<size_t, 2>{{8, 0}}));

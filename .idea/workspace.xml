@@ -13,8 +13,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="042532ac-f9ac-4382-9e5b-512e6f6cabca" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/Makefile" afterPath="$PROJECT_DIR$/Makefile" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pizza.cc" afterPath="$PROJECT_DIR$/pizza.cc" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/pizza.hh" afterPath="$PROJECT_DIR$/pizza.hh" />
     </list>
     <ignored path="jnp1-zadanie4.iws" />
@@ -56,44 +55,63 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pizza.cc" pinned="false" current-in-tab="true">
+      <file leaf-file-name="pizza.cc" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/pizza.cc">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.8971428">
-              <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="pizza.hh" pinned="false" current-in-tab="false">
+      <file leaf-file-name="pizza.hh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pizza.hh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="79" column="69" selection-start-line="79" selection-start-column="69" selection-end-line="79" selection-end-column="69" />
+            <state vertical-scroll-proportion="0.65828574">
+              <caret line="47" column="76" selection-start-line="47" selection-start-column="76" selection-end-line="47" selection-end-column="76" />
               <folding>
                 <element signature="e#171#205#0" expanded="true" />
                 <element signature="e#252#267#0" expanded="true" />
                 <element signature="e#343#377#0" expanded="true" />
                 <element signature="e#472#528#0" expanded="true" />
-                <element signature="e#686#703#0" expanded="true" />
-                <element signature="e#764#774#0" expanded="true" />
-                <element signature="e#959#991#0" expanded="true" />
-                <element signature="e#1045#1060#0" expanded="true" />
-                <element signature="e#1301#1320#0" expanded="true" />
-                <element signature="e#1357#1375#0" expanded="true" />
-                <element signature="e#1488#1508#0" expanded="true" />
-                <element signature="e#1793#1808#0" expanded="true" />
-                <element signature="e#2073#2107#0" expanded="true" />
-                <element signature="e#2146#2156#0" expanded="true" />
-                <element signature="e#2215#2245#0" expanded="true" />
-                <element signature="e#2389#2419#0" expanded="true" />
-                <element signature="e#2481#2496#0" expanded="true" />
-                <element signature="e#2661#2663#0" expanded="true" />
-                <element signature="e#2735#2767#0" expanded="true" />
-                <element signature="e#2832#2834#0" expanded="true" />
-                <element signature="e#2894#2928#0" expanded="true" />
+                <element signature="e#685#719#0" expanded="true" />
+                <element signature="e#756#771#0" expanded="true" />
+                <element signature="e#854#888#0" expanded="true" />
+                <element signature="e#1030#1086#0" expanded="true" />
+                <element signature="e#1231#1265#0" expanded="true" />
+                <element signature="e#1379#1398#0" expanded="true" />
+                <element signature="e#1431#1446#0" expanded="true" />
+                <element signature="e#1526#1560#0" expanded="true" />
+                <element signature="e#1657#1713#0" expanded="true" />
+                <element signature="e#1953#1970#0" expanded="true" />
+                <element signature="e#2031#2041#0" expanded="true" />
+                <element signature="e#2226#2258#0" expanded="true" />
+                <element signature="e#2312#2327#0" expanded="true" />
+                <element signature="e#2568#2587#0" expanded="true" />
+                <element signature="e#2686#2704#0" expanded="true" />
+                <element signature="e#2817#2837#0" expanded="true" />
+                <element signature="e#3122#3137#0" expanded="true" />
+                <element signature="e#3402#3436#0" expanded="true" />
+                <element signature="e#3475#3485#0" expanded="true" />
+                <element signature="e#3544#3574#0" expanded="true" />
+                <element signature="e#3718#3748#0" expanded="true" />
+                <element signature="e#3810#3825#0" expanded="true" />
+                <element signature="e#3990#3992#0" expanded="true" />
+                <element signature="e#4064#4096#0" expanded="true" />
+                <element signature="e#4161#4163#0" expanded="true" />
+                <element signature="e#4223#4257#0" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="pizza_sokolowski.cc" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/pizza_sokolowski.cc">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -108,8 +126,8 @@
       <list>
         <option value="$PROJECT_DIR$/CMakeLists.txt" />
         <option value="$PROJECT_DIR$/Makefile" />
-        <option value="$PROJECT_DIR$/pizza.hh" />
         <option value="$PROJECT_DIR$/pizza.cc" />
+        <option value="$PROJECT_DIR$/pizza.hh" />
       </list>
     </option>
   </component>
@@ -263,6 +281,14 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/pizza_sokolowski.cc">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/Makefile">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -271,41 +297,50 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/pizza.hh">
+    <entry file="file://$PROJECT_DIR$/pizza.cc">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="79" column="69" selection-start-line="79" selection-start-column="69" selection-end-line="79" selection-end-column="69" />
+          <caret line="30" column="0" selection-start-line="30" selection-start-column="0" selection-end-line="30" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/pizza.hh">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.65828574">
+          <caret line="47" column="76" selection-start-line="47" selection-start-column="76" selection-end-line="47" selection-end-column="76" />
           <folding>
             <element signature="e#171#205#0" expanded="true" />
             <element signature="e#252#267#0" expanded="true" />
             <element signature="e#343#377#0" expanded="true" />
             <element signature="e#472#528#0" expanded="true" />
-            <element signature="e#686#703#0" expanded="true" />
-            <element signature="e#764#774#0" expanded="true" />
-            <element signature="e#959#991#0" expanded="true" />
-            <element signature="e#1045#1060#0" expanded="true" />
-            <element signature="e#1301#1320#0" expanded="true" />
-            <element signature="e#1357#1375#0" expanded="true" />
-            <element signature="e#1488#1508#0" expanded="true" />
-            <element signature="e#1793#1808#0" expanded="true" />
-            <element signature="e#2073#2107#0" expanded="true" />
-            <element signature="e#2146#2156#0" expanded="true" />
-            <element signature="e#2215#2245#0" expanded="true" />
-            <element signature="e#2389#2419#0" expanded="true" />
-            <element signature="e#2481#2496#0" expanded="true" />
-            <element signature="e#2661#2663#0" expanded="true" />
-            <element signature="e#2735#2767#0" expanded="true" />
-            <element signature="e#2832#2834#0" expanded="true" />
-            <element signature="e#2894#2928#0" expanded="true" />
+            <element signature="e#685#719#0" expanded="true" />
+            <element signature="e#756#771#0" expanded="true" />
+            <element signature="e#854#888#0" expanded="true" />
+            <element signature="e#1030#1086#0" expanded="true" />
+            <element signature="e#1231#1265#0" expanded="true" />
+            <element signature="e#1379#1398#0" expanded="true" />
+            <element signature="e#1431#1446#0" expanded="true" />
+            <element signature="e#1526#1560#0" expanded="true" />
+            <element signature="e#1657#1713#0" expanded="true" />
+            <element signature="e#1953#1970#0" expanded="true" />
+            <element signature="e#2031#2041#0" expanded="true" />
+            <element signature="e#2226#2258#0" expanded="true" />
+            <element signature="e#2312#2327#0" expanded="true" />
+            <element signature="e#2568#2587#0" expanded="true" />
+            <element signature="e#2686#2704#0" expanded="true" />
+            <element signature="e#2817#2837#0" expanded="true" />
+            <element signature="e#3122#3137#0" expanded="true" />
+            <element signature="e#3402#3436#0" expanded="true" />
+            <element signature="e#3475#3485#0" expanded="true" />
+            <element signature="e#3544#3574#0" expanded="true" />
+            <element signature="e#3718#3748#0" expanded="true" />
+            <element signature="e#3810#3825#0" expanded="true" />
+            <element signature="e#3990#3992#0" expanded="true" />
+            <element signature="e#4064#4096#0" expanded="true" />
+            <element signature="e#4161#4163#0" expanded="true" />
+            <element signature="e#4223#4257#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/pizza.cc">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.8971428">
-          <caret line="88" column="0" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>

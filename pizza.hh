@@ -23,7 +23,51 @@ struct pizza_in_menu<Kind, Kind, Kinds...> : std::true_type {};
 template <typename Kind, typename AnotherKind, typename... Kinds>
 struct pizza_in_menu<Kind, AnotherKind, Kinds...> : pizza_in_menu<Kind, Kinds...> {};
 
-///////////////////////////////////////////////////////////
+//////////////////////////////////////////////////////////
+
+template <typename Kind, typename... Kinds>
+struct count_same_pizzas;
+
+template <typename Kind>
+struct count_same_pizzas<Kind> {
+	static constexpr size_t value = 0;
+};
+
+template <typename Kind, typename... Kinds>
+struct count_same_pizzas<Kind, Kind, Kinds...> {
+	static constexpr size_t value = 1 + count_same_pizzas<Kind, Kinds...>::value;
+};
+
+template <typename Kind, typename AnotherKind, typename... Kinds>
+struct count_same_pizzas<Kind, AnotherKind, Kinds...> {
+	static constexpr size_t value = count_same_pizzas<Kind, Kinds...>::value;
+};
+
+template <typename Kind, typename... Kinds>
+struct unique_pizza {
+	static constexpr bool value = count_same_pizzas<Kind, Kinds...>::value <= 1;
+};
+
+template <typename... Kinds>
+struct unique_pizzas;
+
+template <typename Kind>
+struct unique_pizzas<Kind> {
+	static constexpr bool value = true;
+};
+
+template <typename Kind, typename... Kinds>
+struct unique_pizzas<Kind, Kind, Kinds...> {
+	static constexpr bool value = false;
+};
+
+template <typename Kind, typename AnotherKind, typename... Kinds>
+struct unique_pizzas<Kind, AnotherKind, Kinds...> {
+	static constexpr bool value = unique_pizza<Kind, Kinds...>::value && unique_pizza<AnotherKind, Kinds...>::value;
+};
+
+
+/////////////////////////////////////////////////////////
 
 template <typename T, T x>
 struct package {
@@ -55,6 +99,7 @@ struct has_yumminess<Kind, typename void_t<package<decltype(Kind::yumminess(0)),
 template<typename... Kinds>
 struct Pizzeria {
 private:
+	static_assert(unique_pizzas<Kinds...>::value, "Not unique");
 	template<size_t... pieces>
 	struct Pizza {
 	public:
