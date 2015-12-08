@@ -2,6 +2,25 @@
 #include <iostream>
 #include <tuple>
 
+/////////////////////////////////////////////////////////
+/*
+ * pizza_in_menu check
+ */
+
+template <typename Kind, typename... Kinds>
+struct pizza_in_menu;
+
+template <typename Kind>
+struct pizza_in_menu<Kind> : std::false_type {};
+
+template <typename Kind, typename... Kinds>
+struct pizza_in_menu<Kind, Kind, Kinds...> : std::true_type {};
+
+template <typename Kind, typename AnotherKind, typename...Kinds>
+struct pizza_in_menu<Kind, AnotherKind, Kinds...> : pizza_in_menu<Kind, Kinds...> {};
+
+///////////////////////////////////////////////////////////
+
 
 template<typename... Kinds>
 struct Pizzeria {
@@ -28,6 +47,7 @@ public:
 	template<typename Kind>
 	struct make_pizza {
 		// Sprawdzic czy wystepuje
+		static_assert(pizza_in_menu<Kind, Kinds...>::value, "Nie ma w menu");
 		using type = Pizza<8 * std::is_same<Kind, Kinds>::value ...>;
 	};
 
@@ -46,35 +66,10 @@ struct SumInt {
 	static constexpr size_t value = Int1::value + Int2::value;
 };
 
-/////////////////////////////////////////////////////////
-template <bool is, typename Kind, typename AnotherType, typename... Kinds>
-struct pizza_in_menu {
-	static constexpr bool value = ;
-};
-
-template <bool is, typename Kind, typename... Kinds>
-struct pizza_in_menu {
-	static constexpr bool value = is;
-};
-
-template <typename... Kinds>
-struct pizza_in_menu<true, Kinds...> {
-	static constexpr bool value = true;
-};
-
-template <typename Kind, typename AnotherKind, typename... Kinds>
-struct pizza_in_menu<false, Kind, AnotherKind, Kinds...> {
-	static constexpr bool value = pizza_in_menu<std::is_same<Kind, AnotherKind>::value, Kind, Kinds...>::value;
-};
-///////////////////////////////////////////////////////////
-
 struct NIL {
 	using head = NIL;
 	using tail = NIL;
 };
-
-template <typename Kind, typename... Kinds>
-struct check_pizza_in_menu : pizza_in_menu<false, Kind, Kinds...> { };
 
 template<typename H, typename T = NIL>
 struct List {
@@ -93,7 +88,6 @@ template <>
 struct Length<NIL> {
 	static constexpr size_t value = 0;
 };
-
 
 
 template <typename List1, typename List2>
