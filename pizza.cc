@@ -18,15 +18,20 @@ struct napoli {
 };
 
 int main() {
-    using Dominion = Pizzeria<supreme, napoli>;
+	/*using list = List<Int<13>, List<Int<2>, List<Int<42>>>>;
+	using list2 = List<Int<13>, List<Int<2>, List<Int<42>>>>;
+	static_assert(Length<list>::value == 3, ":(");
+	using list3 = ListSum<list, list2>::type;
+	//static_assert(Length<list3>::value == 5, ":(");
+	std::cerr << Length<list3>::value << std::endl;
+*/
+	using Dominion = Pizzeria<supreme, napoli>;
 
     using Supreme = Dominion::make_pizza<supreme>::type;
-    static_assert(Supreme::count<supreme>() == 8,
-            "Where's my supreme!?");
-    static_assert(Supreme::count<napoli>() == 0,
-            "Napoli!?");
+    static_assert(Supreme::count<supreme>() == 8, "Where's my supreme!?");
+    static_assert(Supreme::count<napoli>() == 0, "Napoli!?");
     assert((Supreme::as_array() == std::array<size_t, 2>{{8, 0}}));
-
+    
     using SuperSupreme = Supreme::sliced_type;
     static_assert(SuperSupreme::count<supreme>() == 16,
             "SuperSupreme does not look supreme!");
@@ -35,8 +40,14 @@ int main() {
     static_assert(SuperExtraSupreme::count<supreme>() == 32,
             "SuperExtraSupreme is not supreme enough!");
 
+
+
+	using notDominion = Pizzeria<napoli>;
+	using notDominionPizza = notDominion::make_pizza<napoli>::type;
+	static_assert(!std::is_same<Supreme::myPizzeria, notDominionPizza::myPizzeria>::value, "nie te same pizzerie"); 
+    
     using SupremeMix = best_mix<Supreme, SuperSupreme>::type;
-    static_assert(SupremeMix::count<supreme>() == 4,
+/*    static_assert(SupremeMix::count<supreme>() == 4,
             "http://www.wolframalpha.com/input/?i=1000*%28%28x%2F18%29%5E2-3%28x%2F18%29%5E3%29");
     static_assert(Supreme::count<napoli>() == 0,
             "How come I got napoli from supreme!?");
@@ -62,7 +73,7 @@ int main() {
     using MixedMixes = best_mix<SupremeMix, BestMix>::type;
     static_assert(std::is_same<BestMix, MixedMixes>::value,
             "Something is definitely mixed here...");
-
+	*/
     // Following code fragments should not compile, with clear and
     // understandable compile errors.
 
