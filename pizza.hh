@@ -45,8 +45,9 @@ template<typename Kind, typename = void>
 struct has_yumminess : std::false_type { };
 
 template<typename Kind>
-struct has_yumminess<Kind, typename void_t<package<size_t, Kind::yumminess(0)>>::type>
-	: std::conditional<Kind::yumminess(0) == 0, std::true_type, std::false_type> {};
+struct has_yumminess<Kind, typename void_t<package<size_t, Kind::yumminess(0)>>::type> {
+	static constexpr bool value = Kind::yumminess(0) == 0;
+};
 
 //////////////////////////////////////////////////////////
 
@@ -76,6 +77,7 @@ public:
 	template<typename Kind>
 	struct make_pizza {
 		// Sprawdzic czy wystepuje
+		static_assert(has_yumminess<Kind>::value, "no yumminess :(");
 		static_assert(pizza_in_menu<Kind, Kinds...>::value, "Nie ma w menu");
 		using type = Pizza<8 * std::is_same<Kind, Kinds>::value ...>;
 	};
