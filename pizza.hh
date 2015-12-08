@@ -51,6 +51,11 @@ struct unique_pizza {
 template <typename... Kinds>
 struct unique_pizzas;
 
+template <>
+struct unique_pizzas<> {
+	static constexpr bool value = true;
+};
+
 template <typename Kind>
 struct unique_pizzas<Kind> {
 	static constexpr bool value = true;
@@ -100,11 +105,13 @@ template<typename... Kinds>
 struct Pizzeria {
 private:
 	static_assert(unique_pizzas<Kinds...>::value, "Not unique");
-	template<size_t... pieces>
+	template<typename Kind, size_t... pieces>
 	struct Pizza {
 	public:
 		// zeby pamietac skad pochodzi
 		using myPizzeria = std::tuple<Kinds...>;
+
+		using kind = Kind;
 
 		template<typename CountKind>
 		static constexpr size_t count() {
@@ -115,16 +122,16 @@ private:
 			return {{ count<Kinds>()... }};
 		}
 
-		using sliced_type = Pizza<2 * pieces...>;
+		using sliced_type = Pizza<kind, 2 * pieces...>;
 	};
 
 public:
 	template<typename Kind>
 	struct make_pizza {
 		// Sprawdzic czy wystepuje
-		static_assert(has_yumminess<Kind>::value, "no yumminess :(");
+		//static_assert(has_yumminess<Kind>::value, "no yumminess :(");
 		static_assert(pizza_in_menu<Kind, Kinds...>::value, "Nie ma w menu");
-		using type = Pizza<8 * std::is_same<Kind, Kinds>::value ...>;
+		using type = Pizza<Kind, 8 * std::is_same<Kind, Kinds>::value ...>;
 	};
 
 	template<typename Pizza1, typename Pizza2>
@@ -180,7 +187,8 @@ struct ListSum<NIL, NIL> {
 template<typename Pizza1, typename Pizza2>
 struct best_mix {
 	// musi sprawdzic czy pizze sa z tej samej pizzeri
-	static_assert(std::is_same<typename Pizza1::myPizzeria, typename Pizza2::myPizzeria>::value,
-				  "nie sa z tej samej pizzeri");
+	static_assert(std::is_same<typename Pizza1::myPizzeria, typename Pizza2::myPizzeria>::value, "nie sa z tej samej pizzeri");
+	static_assert(has_yumminess<typename Pizza1::kind>::value, "no yumminess :(");
+	static_assert(has_yumminess<typename Pizza2::kind>::value, "no yumminess :(");
 	using type = Pizza1; //add_pizza<Pizza1, Pizza2, Pizza1::as_array().size()>;
 };
