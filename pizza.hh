@@ -90,7 +90,7 @@ struct has_yumminess : std::false_type { };
 
 template<typename Kind>
 struct has_yumminess<Kind, typename void_t<package<decltype(Kind::yumminess(0)), Kind::yumminess(0)>>::type> {
-	static constexpr bool value = Kind::yumminess(0) == 0;
+	static constexpr bool value = Kind::yumminess(0) == 0 && std::is_integral<decltype(Kind::yumminess(0))>::value;
 };
 
 //////////////////////////////////////////////////////////
