@@ -67,23 +67,23 @@
       <file leaf-file-name="pizza.hh" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/pizza.hh">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.76114285">
-              <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+            <state vertical-scroll-proportion="0.432">
+              <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
               <folding>
-                <element signature="e#153#187#0" expanded="true" />
-                <element signature="e#220#235#0" expanded="true" />
-                <element signature="e#295#329#0" expanded="true" />
-                <element signature="e#404#459#0" expanded="true" />
-                <element signature="e#617#636#0" expanded="true" />
-                <element signature="e#673#691#0" expanded="true" />
-                <element signature="e#804#824#0" expanded="true" />
-                <element signature="e#1109#1124#0" expanded="true" />
-                <element signature="e#1641#1671#0" expanded="true" />
-                <element signature="e#1733#1748#0" expanded="true" />
-                <element signature="e#1913#1915#0" expanded="true" />
-                <element signature="e#1987#2019#0" expanded="true" />
-                <element signature="e#2084#2086#0" expanded="true" />
-                <element signature="e#2146#2180#0" expanded="true" />
+                <element signature="e#171#205#0" expanded="true" />
+                <element signature="e#252#267#0" expanded="true" />
+                <element signature="e#343#377#0" expanded="true" />
+                <element signature="e#472#528#0" expanded="true" />
+                <element signature="e#686#705#0" expanded="true" />
+                <element signature="e#742#760#0" expanded="true" />
+                <element signature="e#873#893#0" expanded="true" />
+                <element signature="e#1178#1193#0" expanded="true" />
+                <element signature="e#1710#1740#0" expanded="true" />
+                <element signature="e#1802#1817#0" expanded="true" />
+                <element signature="e#1982#1984#0" expanded="true" />
+                <element signature="e#2056#2088#0" expanded="true" />
+                <element signature="e#2153#2155#0" expanded="true" />
+                <element signature="e#2215#2249#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -271,23 +271,23 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/pizza.hh">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.76114285">
-          <caret line="49" column="50" selection-start-line="49" selection-start-column="50" selection-end-line="49" selection-end-column="50" />
+        <state vertical-scroll-proportion="0.432">
+          <caret line="21" column="19" selection-start-line="21" selection-start-column="19" selection-end-line="21" selection-end-column="19" />
           <folding>
-            <element signature="e#153#187#0" expanded="true" />
-            <element signature="e#220#235#0" expanded="true" />
-            <element signature="e#295#329#0" expanded="true" />
-            <element signature="e#404#459#0" expanded="true" />
-            <element signature="e#617#636#0" expanded="true" />
-            <element signature="e#673#691#0" expanded="true" />
-            <element signature="e#804#824#0" expanded="true" />
-            <element signature="e#1109#1124#0" expanded="true" />
-            <element signature="e#1641#1671#0" expanded="true" />
-            <element signature="e#1733#1748#0" expanded="true" />
-            <element signature="e#1913#1915#0" expanded="true" />
-            <element signature="e#1987#2019#0" expanded="true" />
-            <element signature="e#2084#2086#0" expanded="true" />
-            <element signature="e#2146#2180#0" expanded="true" />
+            <element signature="e#171#205#0" expanded="true" />
+            <element signature="e#252#267#0" expanded="true" />
+            <element signature="e#343#377#0" expanded="true" />
+            <element signature="e#472#528#0" expanded="true" />
+            <element signature="e#686#705#0" expanded="true" />
+            <element signature="e#742#760#0" expanded="true" />
+            <element signature="e#873#893#0" expanded="true" />
+            <element signature="e#1178#1193#0" expanded="true" />
+            <element signature="e#1710#1740#0" expanded="true" />
+            <element signature="e#1802#1817#0" expanded="true" />
+            <element signature="e#1982#1984#0" expanded="true" />
+            <element signature="e#2056#2088#0" expanded="true" />
+            <element signature="e#2153#2155#0" expanded="true" />
+            <element signature="e#2215#2249#0" expanded="true" />
           </folding>
         </state>
       </provider>

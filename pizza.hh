@@ -7,16 +7,20 @@
  * pizza_in_menu check
  */
 
+//tylko interfejs
 template <typename Kind, typename... Kinds>
 struct pizza_in_menu;
 
+//pusta lista
 template <typename Kind>
 struct pizza_in_menu<Kind> : std::false_type {};
 
+//głowa jest ok
 template <typename Kind, typename... Kinds>
 struct pizza_in_menu<Kind, Kind, Kinds...> : std::true_type {};
 
-template <typename Kind, typename AnotherKind, typename...Kinds>
+//głowa nie jest ok
+template <typename Kind, typename AnotherKind, typename... Kinds>
 struct pizza_in_menu<Kind, AnotherKind, Kinds...> : pizza_in_menu<Kind, Kinds...> {};
 
 ///////////////////////////////////////////////////////////
