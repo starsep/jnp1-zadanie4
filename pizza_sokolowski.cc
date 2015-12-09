@@ -196,7 +196,7 @@ int main() {
     using MixedMixes = best_mix<SupremeMix, BestMix>::type;
     static_assert(std::is_same<BestMix, MixedMixes>::value,
             "Something is definitely mixed here...");
-    
+
     using Margherita = Pizzeria<margherita>::make_pizza<margherita>::type;
     using BigMargherita = Margherita::sliced_type::sliced_type::sliced_type
                                     ::sliced_type::sliced_type;
@@ -263,7 +263,6 @@ int main() {
     static_assert(SomeHPizza::count<P<222>>() == 125000, "Hahahaha!");
     static_assert(SomeEnermousPizza::count<P<222>>() == 17592186044416000000UL,
         "Hahahahaha!");
-
 #endif
 
 #if (TEST_NUM >= 101) && (TEST_NUM <= 107)
@@ -443,5 +442,6 @@ int main() {
 	Pizza<supreme, 1> P;
 #endif
 
+}
 
 
