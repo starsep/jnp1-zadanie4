@@ -82,7 +82,14 @@ private:
 
     template<typename Kind>
     struct has_yumminess<Kind, typename void_t<package<size_t, Kind::yumminess(0)>>::type> {
-        static constexpr bool value = Kind::yumminess(0) == 0;// && std::is_arithmetic<decltype(Kind::yumminess(0))>::value;
+	private:
+		static constexpr bool yumminess0is0 = Kind::yumminess(0) == decltype(Kind::yumminess(0))(0);
+		static_assert(yumminess0is0, "yumminess(0) nie jest zerowe");
+		static constexpr bool is_arithmetic = true;
+		//static constexpr bool is_arithmetic = std::is_arithmetic<decltype(Kind::yumminess(0))>::value;
+		static_assert(is_arithmetic, "Typ zwracany przez yumminess nie jest arytmetyczny");
+	public:
+		static constexpr bool value =  yumminess0is0 && is_arithmetic;
     };
 
 	template<size_t... pieces>

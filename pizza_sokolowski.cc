@@ -1,5 +1,3 @@
-
-
 #include "pizza.hh"
 
 #include <cstddef>
@@ -10,135 +8,138 @@
 #include <cmath>
 #include <iomanip>
 #include <vector>
+#include <type_traits>
 
 struct supreme {
-	static constexpr int yumminess(size_t slices) {
-		return -125LL*(slices - 6)*slices*slices/243;
-	}
+  static constexpr int yumminess(size_t slices) {
+    return -125LL*(slices - 6)*slices*slices/243;
+  }
 };
 
 struct napoli {
-	int tab[12345678901ULL];
-	static constexpr uint64_t yumminess(size_t slices) {
-		return slices;
-	}
+  int tab[12345678901ULL];
+  static constexpr uint64_t yumminess(size_t slices) {
+    return slices;
+  }
 };
 
 struct margherita {
-	static constexpr double AlmostPi = 3.14159265358979323846;
+  static constexpr double AlmostPi = 3.14159265358979323846;
 
-	static constexpr double almost_sin(double x) {
-		// Wzor Taylora do 9-tej potegi, wykonany mod 2 * Pi; dokladnosc tutaj to
-		// okolo 0.000004
-		if (x < 0) { return -almost_sin(-x); }
-		if (x > AlmostPi + 0.01) { return almost_sin(x - AlmostPi * 2); }
+  static constexpr double almost_sin(double x) {
+    // Wzor Taylora do 9-tej potegi, wykonany mod 2 * Pi; dokladnosc tutaj to
+    // okolo 0.000004
+    if (x < 0) { return -almost_sin(-x); }
+    if (x > AlmostPi + 0.01) { return almost_sin(x - AlmostPi * 2); }
 
-		return x * (1
-					- x * x / (2 * 3) * (1
-										 - x * x / (4 * 5) * (1
-															  - x * x / (6 * 7) * (1
-																				   - x * x / (8 * 9)))));
-	}
+    return x * (1
+         - x * x / (2 * 3) * (1
+         - x * x / (4 * 5) * (1
+         - x * x / (6 * 7) * (1
+         - x * x / (8 * 9)))));
+  }
 
-	static constexpr double yumminess(size_t slices) {
-		return almost_sin(slices);
-	}
+  static constexpr double yumminess(size_t slices) {
+    return almost_sin(slices);
+  }
 };
 
 struct AType {
 private:
-	int value_;
+  int value_;
 
 public:
-	constexpr AType() : value_(0) {}
-	constexpr AType(int x) : value_(x) {}
+  constexpr AType() : value_(0) {}
+  constexpr AType(int x) : value_(x) {}
 
-	constexpr bool operator<(const AType& other) const { return value_ < other.value_; }
-	constexpr bool operator>(const AType& other) const { return value_ > other.value_; }
-	constexpr bool operator<=(const AType& other) const { return value_ <= other.value_; }
-	constexpr bool operator>=(const AType& other) const { return value_ >= other.value_; }
-	constexpr bool operator==(const AType& other) const { return value_ == other.value_; }
-	constexpr bool operator!=(const AType& other) const { return value_ != other.value_; }
+  constexpr bool operator<(const AType& other) const { return value_ < other.value_; }
+  constexpr bool operator>(const AType& other) const { return value_ > other.value_; }
+  constexpr bool operator<=(const AType& other) const { return value_ <= other.value_; }
+  constexpr bool operator>=(const AType& other) const { return value_ >= other.value_; }
+  constexpr bool operator==(const AType& other) const { return value_ == other.value_; }
+  constexpr bool operator!=(const AType& other) const { return value_ != other.value_; }
 };
 
+template<> struct std::is_integral<AType> : public std::true_type {};
+
 struct pepperoni {
-	static constexpr AType yumminess(size_t slices) {
-		return AType((slices * slices * slices) % 37);
-	}
+  static constexpr AType yumminess(size_t slices) {
+    return AType((slices * slices * slices) % 37);
+  }
 };
 
 
 template<unsigned id>
 struct P {
-	static constexpr long yumminess(size_t slices) {
-		return 1L * id * slices * (10 - slices);
-	}
+  static constexpr long yumminess(size_t slices) {
+    return 1L * id * slices * (10 - slices);
+  }
 };
 
 template<>
 struct P<222> {
-	static constexpr long yumminess(size_t slices) {
-		return 222222222L * slices * (250000 - slices);
-	}
+  static constexpr long yumminess(size_t slices) {
+    return 222222222L * slices * (250000 - slices);
+  }
 };
 
 // Przepraszam milosnikow hawajskiej.
 struct hawaiian {
-	static constexpr long yumminess(size_t slices) {
-		return -1L * slices * slices;
-	}
+  static constexpr long yumminess(size_t slices) {
+    return -1L * slices * slices;
+  }
 };
 
 struct italiano {
 private:
-	template<typename T> static constexpr T myabs(T x) {
-		return (x >= 0) ? x : (-x);
-	}
+  template<typename T> static constexpr T myabs(T x) {
+    return (x >= 0) ? x : (-x);
+  }
 
 public:
-	static constexpr size_t yumminess(size_t slices) {
-		return 7 - myabs(int64_t(slices) % 14 - 7);
-	}
+  static constexpr size_t yumminess(size_t slices) {
+    return 7 - myabs(int64_t(slices) % 14 - 7);
+  }
 };
 
 struct primavera {
-	static constexpr __uint128_t yumminess(size_t slices) {
-		return slices == 0 ? 0 : (slices == 1 ? 1 : yumminess(slices - 1) * slices);
-	}
+  static constexpr __uint128_t yumminess(size_t slices) {
+    return slices == 0 ? 0 : (slices == 1 ? 1 : yumminess(slices - 1) * slices);
+  }
 };
 
 
 
 struct bad_pizza_101 {
-	static constexpr int yumminess(size_t slices) {
-		return slices * 5 + 3;
-	}
+  static constexpr int yumminess(size_t slices) {
+     return slices * 5 + 3;
+  }
 };
 
 struct bad_pizza_102 {
-	static constexpr int yumminess = 0;
+  static constexpr int yumminess = 0;
 };
 
 struct bad_pizza_103 {
-	static int yumminess(size_t slices) {
-		return slices;
-	}
+  static int yumminess(size_t slices) {
+    return slices;
+  }
 };
 
 struct bad_pizza_104 {
-	static const int yumminess = 0;
+  static const int yumminess = 0;
 };
 
 struct bad_pizza_105 {
-	static constexpr int yumminess(size_t a, size_t b) {
-		return a * b;
-	}
+  static constexpr int yumminess(size_t a, size_t b) {
+    return a * b;
+  }
 };
 
 struct bad_pizza_106 {
-	template<typename T> static constexpr int yumminess(size_t a, T x = T(0)) {
-		return a + x;
-	}
+  template<typename T> static constexpr int yumminess(size_t a, T x = T(0)) {
+    return a + x;
+  }
 };
 
 struct bad_pizza_107 {};
@@ -146,13 +147,13 @@ struct bad_pizza_107 {};
 
 template<typename T>
 constexpr const T make_const(const T& x) {
-	return x;
+  return x;
 }
 
 
 int main() {
 #if TEST_NUM == 100
-	using Dominion = Pizzeria<supreme, napoli>;
+    using Dominion = Pizzeria<supreme, napoli>;
 
     using Supreme = Dominion::make_pizza<supreme>::type;
     static_assert(Supreme::count<supreme>() == 8,
@@ -196,7 +197,7 @@ int main() {
     using MixedMixes = best_mix<SupremeMix, BestMix>::type;
     static_assert(std::is_same<BestMix, MixedMixes>::value,
             "Something is definitely mixed here...");
-
+    
     using Margherita = Pizzeria<margherita>::make_pizza<margherita>::type;
     using BigMargherita = Margherita::sliced_type::sliced_type::sliced_type
                                     ::sliced_type::sliced_type;
@@ -263,10 +264,11 @@ int main() {
     static_assert(SomeHPizza::count<P<222>>() == 125000, "Hahahaha!");
     static_assert(SomeEnermousPizza::count<P<222>>() == 17592186044416000000UL,
         "Hahahahaha!");
+
 #endif
 
 #if (TEST_NUM >= 101) && (TEST_NUM <= 107)
-	#define BAD_PIZZA_IN(x) bad_pizza_ ## x
+#define BAD_PIZZA_IN(x) bad_pizza_ ## x
 #define BAD_PIZZA(x) BAD_PIZZA_IN(x)
 
     using PizzaType   = BAD_PIZZA(TEST_NUM);
@@ -277,17 +279,17 @@ int main() {
 #endif
 
 #if TEST_NUM == 108
-	using IndecisivePizzeria = Pizzeria<supreme, supreme>;
+    using IndecisivePizzeria = Pizzeria<supreme, supreme>;
     using IndecisiveSupreme = IndecisivePizzeria::make_pizza<supreme>::type;
 #endif
 
 #if TEST_NUM == 109
-	using DeGrasso = Pizzeria<supreme>;
+    using DeGrasso = Pizzeria<supreme>;
     using SupremeNapoli = DeGrasso::make_pizza<napoli>::type;
 #endif
 
 #if TEST_NUM == 110
-	using Dominion = Pizzeria<supreme, napoli>;
+    using Dominion = Pizzeria<supreme, napoli>;
     using Supreme = Dominion::make_pizza<supreme>::type;
     using DeGrasso = Pizzeria<supreme>;
     using DeSupreme = DeGrasso::make_pizza<supreme>::type;
@@ -296,7 +298,7 @@ int main() {
 
 
 #if (TEST_NUM >= 111) && (TEST_NUM <= 114)
-	using ClosedPizzeria = Pizzeria<>;
+    using ClosedPizzeria = Pizzeria<>;
 #if TEST_NUM == 112
     using NonexistentPizza = ClosedPizzeria::make_pizza<supreme>::type;
 #elif TEST_NUM == 113
@@ -307,12 +309,12 @@ int main() {
 #endif
 
 #if TEST_NUM == 115
-	using Dominion = Pizzeria<supreme, napoli>;
+    using Dominion = Pizzeria<supreme, napoli>;
     using ImpossibleOrder = Dominion::make_pizza<supreme, napoli>::type;
 #endif
 
 #if (TEST_NUM >= 116) && (TEST_NUM <= 118)
-	using DoubledPizzeria = Pizzeria<double>;
+    using DoubledPizzeria = Pizzeria<double>;
     using DoublePizza = DoubledPizzeria::make_pizza<double>::type;
 #if TEST_NUM == 117
     using BadMixPizza = best_mix<DoublePizza, DoublePizza>::type;
@@ -322,7 +324,7 @@ int main() {
 #endif
 
 #if TEST_NUM == 119
-	using Dominion1 = Pizzeria<supreme, napoli>;
+    using Dominion1 = Pizzeria<supreme, napoli>;
     using Dominion2 = Pizzeria<supreme, napoli>;
     using Supreme1 = Dominion1::make_pizza<supreme>::type;
     using Supreme2 = Dominion2::make_pizza<supreme>::type;
@@ -332,7 +334,7 @@ int main() {
 #endif
 
 #if TEST_NUM == 120
-	using Dominion1 = Pizzeria<double, supreme, napoli>;
+    using Dominion1 = Pizzeria<double, supreme, napoli>;
     using Dominion2 = Pizzeria<double, napoli, supreme>;
     using Supreme1 = Dominion1::make_pizza<supreme>::type;
     using Supreme2 = Dominion2::make_pizza<supreme>::type;
@@ -340,7 +342,7 @@ int main() {
 #endif
 
 #if TEST_NUM == 121
-	using Dominion1 = Pizzeria<int, uint64_t, double, float, supreme, short>;
+    using Dominion1 = Pizzeria<int, uint64_t, double, float, supreme, short>;
     using Dominion2 = Pizzeria<int, uint64_t, float, double, supreme, short>;
     using Supreme1 = Dominion1::make_pizza<supreme>::type;
     using Supreme2 = Dominion2::make_pizza<supreme>::type;
@@ -348,7 +350,7 @@ int main() {
 #endif
 
 #if TEST_NUM == 122
-	using Recursive = Pizzeria<Pizzeria<Pizzeria<Pizzeria<Pizzeria<Pizzeria<
+    using Recursive = Pizzeria<Pizzeria<Pizzeria<Pizzeria<Pizzeria<Pizzeria<
                                Pizzeria<Pizzeria<Pizzeria<Pizzeria<>>>>>>>>>>;
     using RecursivePizza =
         Recursive::make_pizza<Pizzeria<Pizzeria<Pizzeria<Pizzeria<Pizzeria<
@@ -368,7 +370,7 @@ int main() {
 #endif
 
 #if (TEST_NUM >= 123) && (TEST_NUM <= 124)
-	using MyPizzeria = Pizzeria<hawaiian, italiano, primavera>;
+    using MyPizzeria = Pizzeria<hawaiian, italiano, primavera>;
     using Hawaiian  = MyPizzeria::make_pizza<hawaiian> ::type::sliced_type::sliced_type;
     using Italiano  = MyPizzeria::make_pizza<italiano> ::type::sliced_type::sliced_type;
     using Primavera = MyPizzeria::make_pizza<primavera>::type::sliced_type::sliced_type;
@@ -382,9 +384,9 @@ int main() {
 
 #if TEST_NUM == 123
 #define TEST_MIX(mix) \
-    static_assert(make_const(mix::as_array())[0] == 0, "Hawaiian mix"); \
-    static_assert(make_const(mix::as_array())[1] % 14 == 7, "Italiano mix"); \
-    static_assert(make_const(mix::as_array())[2] == 32, "Primavera mix");
+    static_assert(make_const(mix::as_array())[0] == 0, "Hawaiian mix (" #mix ")"); \
+    static_assert(make_const(mix::as_array())[1] % 14 == 7, "Italiano mix (" #mix ")"); \
+    static_assert(make_const(mix::as_array())[2] == 32, "Primavera mix (" #mix ")");
 
     TEST_MIX(MixHIP);
     TEST_MIX(MixHPI);
@@ -407,41 +409,40 @@ int main() {
 
 
 #if TEST_NUM == 125
-	vector<int> V;
+    vector<int> V;
 #endif
 
 #if TEST_NUM == 126
-	pizza<> P;
+    pizza<> P;
 #endif
 
 #if TEST_NUM == 127
-	pizza<supreme> P;
+    pizza<supreme> P;
 #endif
 
 #if TEST_NUM == 128
-	pizza<supreme, size_t> P;
+    pizza<supreme, size_t> P;
 #endif
 
 #if TEST_NUM == 129
-	pizza<supreme, 1> P;
+    pizza<supreme, 1> P;
 #endif
 
 #if TEST_NUM == 130
-	Pizza<> P;
+    Pizza<> P;
 #endif
 
 #if TEST_NUM == 131
-	Pizza<supreme> P;
+    Pizza<supreme> P;
 #endif
 
 #if TEST_NUM == 132
-	Pizza<supreme, size_t> P;
+    Pizza<supreme, size_t> P;
 #endif
 
 #if TEST_NUM == 133
-	Pizza<supreme, 1> P;
+    Pizza<supreme, 1> P;
 #endif
+      
 
 }
-
-
