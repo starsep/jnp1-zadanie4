@@ -81,16 +81,8 @@ private:
     struct has_yumminess : std::false_type {};
 
     template<typename Kind>
-    struct has_yumminess<Kind, typename void_t<package<size_t, Kind::yumminess(0)>>::type> {
-	private:
-		static constexpr bool yumminess0is0 = Kind::yumminess(0) == decltype(Kind::yumminess(0))(0);
-		static_assert(yumminess0is0, "yumminess(0) nie jest zerowe");
-		static constexpr bool is_arithmetic = true;
-		//static constexpr bool is_arithmetic = std::is_arithmetic<decltype(Kind::yumminess(0))>::value;
-		static_assert(is_arithmetic, "Typ zwracany przez yumminess nie jest arytmetyczny");
-	public:
-		static constexpr bool value =  yumminess0is0 && is_arithmetic;
-    };
+    struct has_yumminess<Kind, typename void_t<package<decltype(Kind::yumminess(0)), Kind::yumminess(0)>>::type>
+		: public std::true_type { };
 
 	template<size_t... pieces>
     struct Pizza {
@@ -116,12 +108,15 @@ private:
     template <typename Kind>
     static constexpr int bestNumber(size_t piece) {
 		static_assert(has_yumminess<Kind>::value, "Brak metody yumminess");
+		using YumminessType = decltype(Kind::yumminess(0));
+		static_assert(Kind::yumminess(0) == YumminessType(0), "yumminess(0) nie jest zerowe");
+		//static_assert(std::is_arithmetic<YumminessType>::value, "Typ zwracany przez yumminess nie jest arytmetyczny");
         size_t result = 0;
-       	long double max = 0;
+       	YumminessType max(0);
         for (size_t i = 0; i <= piece; ++i) {
-            const long double curr = Kind::yumminess(i);
-            if (curr > max) {
-                max = curr;
+            const YumminessType current = Kind::yumminess(i);
+            if (current > max) {
+                max = current;
                 result = i;
             }
         }       
