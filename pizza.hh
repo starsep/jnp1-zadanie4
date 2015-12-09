@@ -132,11 +132,6 @@ private:
 public:
 	static_assert(unique_pizzas<Kinds...>::value, "W pizzeri powtarzaja sie typy pizz");
 
-    template <typename Kind>
-    static constexpr int magia(size_t piece) {
-        return Kind::yumminess(piece);
-    }
-    
     template<typename Kind>
     struct make_pizza {
         // Sprawdzic czy wystepuje      
