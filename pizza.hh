@@ -6,38 +6,39 @@
 template <typename... Kinds>
 struct Pizzeria {
 private:
-
-    //tylko interfejs
+    //interfejs pizza_in_menu
     template <typename Kind, typename... otherKinds>
     struct pizza_in_menu;
 
-    //pusta lista
+    //specjalizacja pizza_in_menu: pusta lista
     template <typename Kind>
     struct pizza_in_menu<Kind> : std::false_type {};
 
-    //głowa jest ok
+    //specjalizacja pizza_in_menu: głowa tego samego typu
     template <typename Kind, typename... otherKinds>
     struct pizza_in_menu<Kind, Kind, otherKinds...> : std::true_type {};
 
-    //głowa nie jest ok
+    //specjalizacja pizza_in_menu: głowa innego typu
     template <typename Kind, typename AnotherKind, typename... otherKinds>
     struct pizza_in_menu<Kind, AnotherKind, otherKinds...> : pizza_in_menu<Kind, otherKinds...> {};
 
-    //////////////////////////////////////////////////////////
-
+	//interfejs count_same_pizzas
     template <typename Kind, typename... otherKinds>
     struct count_same_pizzas;
 
+	//specjalizacja pizza_in_menu: pusta lista
     template <typename Kind>
     struct count_same_pizzas<Kind> {
         static constexpr size_t value = 0;
     };
 
+	//specjalizacja pizza_in_menu: głowa tego samego typu
     template <typename Kind, typename... otherKinds>
     struct count_same_pizzas<Kind, Kind, otherKinds...> {
         static constexpr size_t value = 1 + count_same_pizzas<Kind, otherKinds...>::value;
     };
 
+	//specjalizacja pizza_in_menu: głowa innego typu
     template <typename Kind, typename AnotherKind, typename... otherKinds>
     struct count_same_pizzas<Kind, AnotherKind, otherKinds...> {
         static constexpr size_t value = count_same_pizzas<Kind, otherKinds...>::value;
@@ -48,25 +49,25 @@ private:
         static constexpr bool value = count_same_pizzas<Kind, otherKinds...>::value <= 1;
     };
 
+	//interfejs unique_pizzas
     template <typename... otherKinds>
     struct unique_pizzas;
 
+	//specjalizacja unique_pizzas: pusta lista
     template <typename Kind>
-    struct unique_pizzas<Kind> {
-        static constexpr bool value = true;
-    };
+    struct unique_pizzas<Kind> : std::true_type { };
 
+	//specjalizacja unique_pizzas: głowa tego samego typu
     template <typename Kind, typename... otherKinds>
-    struct unique_pizzas<Kind, Kind, otherKinds...> {
-        static constexpr bool value = false;
-    };
+    struct unique_pizzas<Kind, Kind, otherKinds...> : std::false_type { };
 
+	//specjalizacja unique_pizzas: głowa innego typu
     template <typename Kind, typename AnotherKind, typename... otherKinds>
     struct unique_pizzas<Kind, AnotherKind, otherKinds...> {
         static constexpr bool value = unique_pizza<Kind, otherKinds...>::value && unique_pizza<AnotherKind, otherKinds...>::value;
     };
-    /////////////////////////////////////////////////////////
 
+	//struktura opakowująca wartość w typ
     template <typename T, T x>
     struct package {
         static constexpr T value = x;
@@ -82,13 +83,14 @@ private:
 
     template<typename Kind>
     struct has_yumminess<Kind, typename void_t<package<decltype(Kind::yumminess(0)), Kind::yumminess(0)>>::type>
-		: public std::true_type { };
+		: std::true_type { };
 
 	template<size_t... pieces>
     struct Pizza {
-    public:
-        // zeby pamietac skad pochodzi
-        using myPizzeria = Pizzeria<Kinds...>;
+	public:
+		// zeby pamietac skad pochodzi
+		using myPizzeria = Pizzeria<Kinds...>;
+
         template<typename CountKind>
         static constexpr size_t count() {           
             return ((std::is_same<CountKind,Kinds>::value * pieces) + ...);
@@ -99,11 +101,6 @@ private:
         }
         using sliced_type = Pizza<2*pieces...>;
     };
-
-    template<typename Kind>
-    static constexpr bool czyJest() {
-        return ((std::is_same<Kind, Kinds>::value) || ... );
-    }
     
     template <typename Kind>
     static constexpr int bestNumber(size_t piece) {
@@ -134,8 +131,7 @@ public:
 
     template<typename Kind>
     struct make_pizza {
-        // Sprawdzic czy wystepuje      
-        //static_assert(has_yumminess<Kind>::value, "no yumminess :(");
+        // Sprawdzic czy wystepuje
         static_assert(pizza_in_menu<Kind, Kinds...>::value, "Tej pizzy nie ma w menu tej pizzeri");
         using type = Pizza<8 * std::is_same<Kind,Kinds>::value ...>;
     };
@@ -149,16 +145,5 @@ template<typename Pizza1, typename Pizza2>
 struct best_mix {
     // musi sprawdzic czy pizze sa z tej samej pizzeri
     static_assert(std::is_same<typename Pizza1::myPizzeria, typename Pizza2::myPizzeria>::value, "Pizze z roznych pizzeri");
-	//static_assert(has_yumminess<typename Pizza1::kind>::value, "no yumminess :(");
-	//static_assert(has_yumminess<typename Pizza2::kind>::value, "no yumminess :(");
 	using type = typename Pizza1::myPizzeria:: template helpBestMix<Pizza1,Pizza2>::type;
 };
-
-
-/* 
-ASERCJE:
-czy pizze z tej samej pizzeri w miksie
-czy pizza wystepuje w menu przy tworzeniu
-czy yumminess od zera to zero
-czy przy tworzeniu pizzeri wszystkie typy rozne
-*/
