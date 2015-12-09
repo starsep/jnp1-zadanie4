@@ -85,10 +85,7 @@ private:
         static constexpr bool value = Kind::yumminess(0) == 0;// && std::is_arithmetic<decltype(Kind::yumminess(0))>::value;
     };
 
-
-
-    static_assert(unique_pizzas<Kinds...>::value, "Not unique");
-    template<size_t... pieces>
+	template<size_t... pieces>
     struct Pizza {
     public:
         // zeby pamietac skad pochodzi
@@ -111,7 +108,7 @@ private:
     
     template <typename Kind>
     static constexpr int bestNumber(size_t piece) {
-		static_assert(has_yumminess<Kind>::value, "no yumminess :(");
+		static_assert(has_yumminess<Kind>::value, "Brak metody yumminess");
         size_t result = 0;
        	long double max = 0;
         for (size_t i = 0; i <= piece; ++i) {
@@ -131,6 +128,8 @@ private:
     };
 
 public:
+	static_assert(unique_pizzas<Kinds...>::value, "W pizzeri powtarzaja sie typy pizz");
+
     template <typename Kind>
     static constexpr int magia(size_t piece) {
         return Kind::yumminess(piece);
@@ -140,7 +139,7 @@ public:
     struct make_pizza {
         // Sprawdzic czy wystepuje      
         //static_assert(has_yumminess<Kind>::value, "no yumminess :(");
-        static_assert(pizza_in_menu<Kind, Kinds...>::value, "Nie ma w menu");
+        static_assert(pizza_in_menu<Kind, Kinds...>::value, "Tej pizzy nie ma w menu tej pizzeri");
         using type = Pizza<8 * std::is_same<Kind,Kinds>::value ...>;
     };
 
@@ -152,7 +151,7 @@ public:
 template<typename Pizza1, typename Pizza2>
 struct best_mix {
     // musi sprawdzic czy pizze sa z tej samej pizzeri
-    static_assert(std::is_same<typename Pizza1::myPizzeria, typename Pizza2::myPizzeria>::value, "nie sa z tej samej pizzeri");
+    static_assert(std::is_same<typename Pizza1::myPizzeria, typename Pizza2::myPizzeria>::value, "Pizze z roznych pizzeri");
 	//static_assert(has_yumminess<typename Pizza1::kind>::value, "no yumminess :(");
 	//static_assert(has_yumminess<typename Pizza2::kind>::value, "no yumminess :(");
 	using type = typename Pizza1::myPizzeria:: template helpBestMix<Pizza1,Pizza2>::type;
